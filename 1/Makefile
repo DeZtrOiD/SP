@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -g
+CFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -ggdb3
 
 TARGET = main.out
 SRCS = main.c sp_1.c
@@ -21,3 +21,6 @@ clean:
 	rm -f $(OBJS)
 
 .PHONY: all clean
+
+
+

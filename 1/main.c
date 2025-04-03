@@ -16,7 +16,7 @@ int main(){
         char c = getchar();
         if (feof(stdin)) continue;
         else if (ferror(stdin)){
-            code = M_ERR_READ_I;
+            code = READ_ERR_I;
             err_print(code);
             return code;
         }
@@ -24,7 +24,7 @@ int main(){
             c = getchar();
             if (feof(stdin) || c == '\n') break;
             else if (ferror(stdin)){
-                code = M_ERR_READ_I;
+                code = READ_ERR_I;
                 err_print(code);
                 return code;
             }
@@ -33,7 +33,7 @@ int main(){
                     c = getchar();
                     if (feof(stdin)) break;
                     else if (ferror(stdin)){
-                        code = M_ERR_READ_I;
+                        code = READ_ERR_I;
                         err_print(code);
                         return code;
                     }
@@ -45,7 +45,7 @@ int main(){
         else if (c == 'R') {
             c = getchar();
             if (ferror(stdin)){
-                code = M_ERR_READ_I;
+                code = READ_ERR_I;
                 err_print(code);
                 return code;
             }
@@ -64,7 +64,7 @@ int main(){
                     c = getchar();
                     if (feof(stdin)) break;
                     else if (ferror(stdin)){
-                        code = M_ERR_READ_I;
+                        code = READ_ERR_I;
                         err_print(code);
                         return code;
                     }
@@ -73,10 +73,38 @@ int main(){
             }
         }
         else if (c == '\n') continue;
+        else if (c == EXIT_CHAR){
+            c = getchar();
+            if (ferror(stdin)){
+                code = READ_ERR_I;
+                err_print(code);
+                return code;
+            }
+            else if (feof(stdin) || c == '\n') return 0;
+            while (c == ' ') {
+                c = getchar();
+                if (ferror(stdin)){
+                    code = READ_ERR_I;
+                    err_print(code);
+                    return code;
+                }
+                else if (feof(stdin) || c == '\n') return 0;
+            }
+            while (1) {
+                c = getchar();
+                if (feof(stdin)) break;
+                else if (ferror(stdin)){
+                    code = READ_ERR_I;
+                    err_print(code);
+                    return code;
+                }
+                else if (c == '\n') break;
+            }
+        }
         else {
             c = getchar();
             if (ferror(stdin)){
-                code = M_ERR_READ_I;
+                code = READ_ERR_I;
                 err_print(code);
                 return code;
             }
@@ -86,7 +114,7 @@ int main(){
                     c = getchar();
                     if (feof(stdin)) break;
                     else if (ferror(stdin)){
-                        code = M_ERR_READ_I;
+                        code = READ_ERR_I;
                         err_print(code);
                         return code;
                     }
@@ -109,7 +137,7 @@ int main(){
     while (flag){
         code = command_handler(login);
         if (code == 0) break;
-        else if (code == CC_LOGOUT_CODE){
+        else if (code == LOGOUT_CODE){
             code = authorization(login, sizeof(login)/sizeof(char));
                 if (code == 0){
                     code = 0;
