@@ -147,6 +147,7 @@ int get_disk_offset(const char* full_path, __u64* disk_off){
         return SP_GET_OFFSET_ERR;
     }
     *disk_off = fmap->fm_extents[0].fe_physical;
+    free(fmap);
     close(fd);
     return 0;
 }
