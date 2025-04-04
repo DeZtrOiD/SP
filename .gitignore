@@ -1,6 +1,7 @@
 .vscode/
+m_ls
 2/
-7/
 *.o
 *.out
 password.txt
+*.rar
