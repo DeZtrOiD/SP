@@ -4,13 +4,10 @@
 #include <linux/limits.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <stdio.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/fs.h>
 #include <linux/fiemap.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
 #include <stdlib.h>
