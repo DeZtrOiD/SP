@@ -73,8 +73,9 @@ int list_directory(const char *path_dir){
     while (1) {
         if ((entry = readdir(dir)) == NULL){
             closedir(dir);
-            if (errno == EBADF) return SP_DIR_READ_ERR;
-            else return 0;
+            // if (errno == EBADF) return SP_DIR_READ_ERR;
+            // else return 0;
+            return 0;
         }
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0){
             continue;
