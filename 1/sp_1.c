@@ -627,7 +627,7 @@ int sanctions_com(const char* args){
 }
 
 int get_limit(long offset){
-    char buff[RECORD_SIZE];
+    char buff[RECORD_SIZE] = {0};
     int passwords = open(PASSWORD_FILE_NAME, O_RDONLY, S_IRWXU | S_IRWXG | S_IRWXO);
     if (passwords == -1) return OPEN_FILE_ERR_R;
     if (lseek(passwords, offset, SEEK_SET) == -1){
