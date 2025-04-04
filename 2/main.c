@@ -13,7 +13,7 @@ int main(int argc, char** argv){
 	int err = processHandles(handles, argc, argc - 1, argv);
 	if(err == ERR_NO_SUCH_FLAG && argc > 2) err = processHandles(handles, argc, argc - 2, argv);
 	
-	if(err) printf(TXT_ERR_GEN, err);
+	if(err) printf(SP_TXT_ERR, err);
 	return err;
 }
 

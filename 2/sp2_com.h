@@ -24,6 +24,6 @@
 #define SP_WRONG_MASK -250
 #define SP_COPYN_EXE "%s/copy_file.elf"
 #define SP_FINDER_EXE "%s/finder.elf"
-#define TXT_ERR_GEN "An error occurred: #%d\n"
+#define SP_TXT_ERR "An error occurred: #%d\n"
 
 #endif

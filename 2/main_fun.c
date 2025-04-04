@@ -182,11 +182,17 @@ int handleMask(int argc, char** argv) {
 int handleCopyN(int argc, char** argv){
 	int value = strcmpno("copyN", argv[argc-1]);
 	if (value <= 0) return value;
-
+	int count = 0;
+	int err = 0;
+	int buff_err = 0;
 	for(size_t argn = 1; argn < argc - 1; ++argn){
 		pid_t pid = fork();
 		switch(pid){
 			case -1:
+				for (;count > 0; --count){
+					wait(&buff_err);
+					// err |= buff_err;
+				}
 				return ERR_NO_SUCH_RESOURCE;
 			case 0: {
 				char cwd[1024] = {0};
@@ -201,20 +207,30 @@ int handleCopyN(int argc, char** argv){
 				break;
             }
 			default:
+				++count;
 				break;
 		}
 	}
-	int err = 0;
-	wait(&err);
+	for (;count > 0; --count){
+		wait(&buff_err);
+		err |= buff_err;
+	}
 	return err;
 }
 
 
 int handleFind(int argc, char** argv){
+	int count = 0;
+	int err = 0;
+	int buff_err = 0;
 	for(size_t argn = 1; argn < argc - 2; ++argn){
 		pid_t pid = fork();
 		switch(pid){
 			case -1:
+				for (;count > 0; --count){
+					wait(&buff_err);
+				//	err |= buff_err;
+				}
 				return ERR_NO_SUCH_RESOURCE;
 			case 0:{ 
 				char cwd[1024];
@@ -229,11 +245,14 @@ int handleFind(int argc, char** argv){
 				break;
             }
 			default:
+				++count;
 				break;
 		}
 	}
-	int err = 0;
-	wait(&err); // ??
+	for (;count > 0; --count){
+		wait(&buff_err);
+		err |= buff_err;
+	}
 	return err;
 }
 
